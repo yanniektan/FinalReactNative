@@ -1,0 +1,7 @@
+{
+  "name": "FinalReactNativeProject",
+  "displayName": "FinalReactNativeProject",
+  "plugins": [
+    "expo-router"
+  ]
+}
