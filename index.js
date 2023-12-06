@@ -8,25 +8,13 @@ import Tts from 'react-native-tts'
 
 export default function Index({navigation}) {
 
-  Tts.getInitStatus().then(() => {
-    Tts.setDefaultPitch(0.5);
-  }, (err) => {
-    if (err.code === 'no_engine') {
-      Tts.requestInstallEngine();
-    }
-  });
-
-  const handlePress = () => {
-    Tts.speak('Hello, how are you?');
-  };
   return (
     <View style={styles.container}>
       <View style={styles.main}>
         <Text style={styles.title}>Aloud</Text>
         <Text style={styles.subtitle}>A Language Listening App</Text>
         <Text style={styles.link} onPress={() => navigation.navigate('ChooseLang')}> Begin </Text>
-        <TouchableOpacity style={styles.button} onPress={handlePress}>
-        <Text style={styles.text}>Speak</Text>
+        <TouchableOpacity style={styles.button}>
       </TouchableOpacity>
       </View>
     </View>
@@ -40,7 +28,7 @@ const styles = StyleSheet.create({
     paddingTop: "90%",
     paddingLeft: "10%",
     paddingRight: "10%",
-
+    backgroundColor: "white",
   },
   main: {
     flex: 1,

@@ -33,6 +33,7 @@ export default function ChooseLang({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.container}>
+        <Text style={styles.title}>Choose a Language.</Text>
         <TouchableOpacity style={styles.button} onPress={ () => makeLanguage("Spanish")}>
           <Text style={styles.buttonText}>Spanish</Text>
         </TouchableOpacity>
@@ -68,6 +69,12 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center",
     padding: 20,
+  },
+  title: {
+    fontSize: 30,
+    color: '#6191F0',
+    fontWeight: "bold",
+    margin: "5%",
   },
   main: {
     flex: 1,

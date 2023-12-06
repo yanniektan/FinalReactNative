@@ -43,6 +43,7 @@ export default function ChosenStory({navigation, route}, translate) {
   });
 
   const handlePress = (sentence) => {
+    Tts.setDefaultRate(0.5);
     Tts.speak(sentence);
   };
 
@@ -51,7 +52,7 @@ export default function ChosenStory({navigation, route}, translate) {
     Tts.speak(sentence);
   };
 
-  const sentences = translatedStory.split('. ').filter(sentence => sentence.length > 0).map(sentence => sentence.trim() + '.');
+  const sentences = translatedStory.split('. ').filter(sentence => sentence.length > 0).map(sentence => sentence.trim());
 
   return (
     <View style={styles.container}>
@@ -60,7 +61,6 @@ export default function ChosenStory({navigation, route}, translate) {
         Click to Translate (Will take a moment...)
         </Text>      
       </TouchableOpacity>
-      <Text>{ content }</Text>            
       <Text style={styles.subtitle}>Listen Sentence by Sentence</Text>
 
       {
