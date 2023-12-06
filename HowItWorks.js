@@ -2,6 +2,7 @@ import { StyleSheet, Text, View , Button} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native'; 
 import React, { useState, useEffect} from 'react';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 
@@ -20,10 +21,8 @@ export default function HowItWorks({navigation}) {
         <Text style={styles.subtitle}>You’ll be given a selection of short stories to listen to.</Text>
         <Text style={styles.subtitle}>For every english sentence, the story will be repeated in your language three times.</Text>
         <Text style={styles.subtitle}>Each time, slightly faster.</Text>
-        <Text>{route.params.language}</Text>
         <Text style={styles.link} 
-              onPress={() => navigation.navigate('StoryList', {language})}
-              > Begin </Text>
+              onPress={() => navigation.navigate('StoryList', {language})}> Begin </Text>
         </View>
 
     </View>
