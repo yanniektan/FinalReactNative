@@ -31,6 +31,7 @@ import Index from './index';
 import StoryList from './StoryList';
 import ChooseLang from './ChooseLang';
 import HowItWorks from './HowItWorks';
+import ChosenStory from './ChosenStory';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -72,14 +73,16 @@ function App(): JSX.Element {
   const Stack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Index} />
-        <Stack.Screen name="ChooseLang" component={ChooseLang} />
-        <Stack.Screen name="StoryList" component={StoryList}/>
-        <Stack.Screen name="HowItWorks" component={HowItWorks}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Index} />
+          <Stack.Screen name="ChooseLang" component={ChooseLang} />
+          <Stack.Screen name="StoryList" component={StoryList}/>
+          <Stack.Screen name="HowItWorks" component={HowItWorks}/>
+          <Stack.Screen name="ChosenStory" component={ChosenStory}/>
+
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 

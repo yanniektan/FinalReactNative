@@ -22,12 +22,8 @@ export default function HowItWorks({navigation}) {
         <Text style={styles.subtitle}>Each time, slightly faster.</Text>
         <Text>{route.params.language}</Text>
         <Text style={styles.link} 
-              
               onPress={() => navigation.navigate('StoryList', {language})}
               > Begin </Text>
-
-
-        {/* <Button title="Go Back" onPress={ () => router.back()}></Button> */}
         </View>
 
     </View>

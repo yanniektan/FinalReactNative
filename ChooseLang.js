@@ -18,8 +18,6 @@ export default function ChooseLang({navigation}) {
     }
   }
 
-  console.log(language)
-
   return (
     <View style={styles.container}>
       <View style={styles.main}>
@@ -37,8 +35,7 @@ export default function ChooseLang({navigation}) {
                 <View style={styles.main}>
                   <Text style={styles.link}
                     onPress={() => navigation.navigate('HowItWorks',
-                    {language
-                    })
+                    {language})
                   }> Next </Text>                
                                   {/* <Text style={styles.chosenLang}> You have chosen {language}.</Text> */}
                 </View>
