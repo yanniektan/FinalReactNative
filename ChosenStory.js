@@ -5,6 +5,7 @@ import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import { translateLang } from "./translate";
 import { ScrollView } from "react-native-gesture-handler";
+import Tts from "react-native-tts";
 
 export default function ChosenStory({navigation, route}, translate) {
 
@@ -32,9 +33,25 @@ export default function ChosenStory({navigation, route}, translate) {
       }
   }, [content, translateLanguage]);
 
-  // const textToSpeech = 
-  
-  const sentences = translatedStory.split('. ').filter(sentence => sentence.length > 0).map(sentence => sentence.trim());
+  Tts.getInitStatus().then(() => {
+    Tts.setDefaultPitch(0.5);
+    Tts.setDefaultLanguage(translateLanguage);
+  }, (err) => {
+    if (err.code === 'no_engine') {
+      Tts.requestInstallEngine();
+    }
+  });
+
+  const handlePress = (sentence) => {
+    Tts.speak(sentence);
+  };
+
+  const handlePressSlow = (sentence) => {
+    Tts.setDefaultRate(0.2);
+    Tts.speak(sentence);
+  };
+
+  const sentences = translatedStory.split('. ').filter(sentence => sentence.length > 0).map(sentence => sentence.trim() + '.');
 
   return (
     <View style={styles.container}>
@@ -50,9 +67,13 @@ export default function ChosenStory({navigation, route}, translate) {
         sentences.map((sentence, index) => (
            <View >
             <View style={styles.left}>      
+
               <Text key={index}>{sentence}</Text>
-              <TouchableOpacity style={styles.playButton}> 
+              <TouchableOpacity style={styles.playButton} onPress={() => handlePress(sentence)} > 
                   <Text style={styles.play}> PLAY </Text> 
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.playButtonGreen} onPress={() => handlePressSlow(sentence)} > 
+                  <Text style={styles.play}> PLAY SLOWER </Text> 
               </TouchableOpacity>
             </View>
           </View>
@@ -60,8 +81,8 @@ export default function ChosenStory({navigation, route}, translate) {
       }
     </View>
   );
+  // onPress={() => handleVoice(sentence)
 }
-// onPress={textToSpeech}
 
 const styles = StyleSheet.create({
   playButton: {
@@ -70,9 +91,18 @@ const styles = StyleSheet.create({
     padding: 2,            // Padding for size
     justifyContent: 'center', // Align children to the top
     alignItems: 'center',    
-    marginBottom: "2.5%",
-    marginTop: "2.5%",
+    marginBottom: "1.5%",
+    marginTop: "1.5%",
     },
+    playButtonGreen: {
+      backgroundColor: 'green', // Red background
+      borderRadius: 30,       // High border radius for round shape
+      padding: 2,            // Padding for size
+      justifyContent: 'center', // Align children to the top
+      alignItems: 'center',    
+      marginBottom: "1.5%",
+      marginTop: "1.5%",
+      },
   play: {
     color: 'white',
     fontWeight: 'bold',
@@ -82,8 +112,8 @@ const styles = StyleSheet.create({
     borderColor: "black",
   },
   left: {
-    marginRight: "5%",
-    marginLeft: "5%",
+    marginRight: "2%",
+    marginLeft: "2%",
     marginBottom: "2.5%",
     marginTop: "2.5%",
   },
@@ -120,7 +150,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',         // Center align text
     fontWeight: 'bold',          // Bold font weight
     color: '#333',               // Color of the text, choose what fits your app theme
-    marginVertical: 20,          // Vertical margin for spacing
+    marginVertical: 10,          // Vertical margin for spacing
     textShadowRadius: 1,
   },
   content: {
