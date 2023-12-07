@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, Text, View , Button, TouchableOpacity, ActivityIndicator} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native'; 
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useContext, useCallback, useLayoutEffect} from 'react';
 import axios from 'axios';
 import { translateLang } from "./translate";
 import { ScrollView } from "react-native-gesture-handler";
@@ -14,6 +14,10 @@ export default function ChosenStory({navigation, route}, translate) {
   const translateLanguage = route.params.translate;
   const languageFrom = 'en'
   const [isLoading, setIsLoading] = useState(false);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
 
   const onSubmit = useCallback(async () => {
       try {
@@ -79,6 +83,11 @@ export default function ChosenStory({navigation, route}, translate) {
           </View>
         ))
       }
+
+        <View>
+          <Button onPress={() => navigation.navigate('ChooseLang')} title="Go back" />
+        </View>
+        
     </View>
   );
   // onPress={() => handleVoice(sentence)

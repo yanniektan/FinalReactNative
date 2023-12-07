@@ -1,16 +1,17 @@
 import { StyleSheet, Text, View , Button} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native'; 
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useLayoutEffect} from 'react';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-
-
-export default function HowItWorks({navigation}) {
+export default function HowItWorks({navigation: navigation}) {
   const route = useRoute(); 
-  // const [language, setLanguage] = useState("");
-
   const language = route.params.language;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+
 
   return (
     <View style={styles.container}>
@@ -25,6 +26,9 @@ export default function HowItWorks({navigation}) {
               onPress={() => navigation.navigate('StoryList', {language})}> Begin </Text>
         </View>
 
+        <View>
+          <Button onPress={() => navigation.navigate('ChooseLang')} title="Go back" />
+        </View>
     </View>
   );
 }

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View , Button, TouchableOpacity, ScrollView} from "re
 import { NavigationContainer } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native'; 
 import firestore from '@react-native-firebase/firestore';
-import React, { useState, useEffect, createContext} from 'react';
+import React, { useState, useEffect, createContext, useLayoutEffect} from 'react';
 
 export default function StoryList({navigation}, language) {
 
@@ -12,6 +12,10 @@ export default function StoryList({navigation}, language) {
   const [indexStory , setIndex] = useState(0)
   const [storyArray, setStoryArray] = useState([]) // array of objects
   let storyList = [];
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
 
   useEffect(() => {
     firestore()
@@ -48,6 +52,10 @@ export default function StoryList({navigation}, language) {
           </TouchableOpacity>
           </View>
         )}
+
+        <View>
+          <Button onPress={() => navigation.navigate('ChooseLang')} title="Go back" />
+        </View>
     </View>
   );
 }

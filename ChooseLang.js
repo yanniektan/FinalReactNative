@@ -1,8 +1,12 @@
 import { StyleSheet, Text, View , Button, TouchableOpacity} from "react-native";
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useLayoutEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function ChooseLang({navigation}) {
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
 
   const [language, setLanguage] = useState("");
   const [languageTitle, setLanguageTitle] = useState("")
@@ -50,13 +54,16 @@ export default function ChooseLang({navigation}) {
           <Text style={styles.buttonText}>Arabic</Text>
         </TouchableOpacity>
       {(language != "") && (
-                <View style={styles.container}>
-                  <Text style={styles.link}
+                <View>
+                  <Text style={styles.chosenLang}> You have chosen {languageTitle}.</Text>
+                  <TouchableOpacity style={styles.buttonNext}>
+                  <Text style={styles.buttonText}
                     onPress={() => navigation.navigate('HowItWorks',
                     {language})}> Next </Text>
-                  <Text style={styles.chosenLang}> You have chosen {languageTitle}.</Text>
+                  </TouchableOpacity>
                 </View>
       )}
+
       </View>
       
     </View>
@@ -68,7 +75,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     alignItems: "center",
-    padding: 20,
+    padding: 10,
+    paddingTop: 80,
   },
   title: {
     fontSize: 30,
@@ -88,7 +96,13 @@ const styles = StyleSheet.create({
   },
   chosenLang: {
     fontSize: 15,
+    paddingTop: 40,
+    textAlign: 'center',         
+    alignItems: 'center',
+    // Center align text
     fontWeight: '500',
+    color: "black",
+    fontWeight: 800,
   },
   language: {
     fontSize: 80,
@@ -112,6 +126,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     padding: 8,
+  },
+  buttonNext: {
+    backgroundColor: 'red',
+    margin: "2%",  // Adjust padding to change size
+    borderRadius: 15,
+    padding: "1.2%",
+    alignItems: 'center',
   },
   buttonText: {
     color: 'white',
